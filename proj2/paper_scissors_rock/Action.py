@@ -12,4 +12,4 @@ class Action(Enum):
         return self.value == other.value
 
     def __gt__(self, other) -> bool:
-        return self.value >= (other.value + 1) % ACTION_COUNT
+        return self.value == (other.value + 1) % ACTION_COUNT
