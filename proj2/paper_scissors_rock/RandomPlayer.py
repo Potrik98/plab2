@@ -7,7 +7,7 @@ class RandomPlayer(Player):
         r = random.randrange(0, ACTION_COUNT)
         return Action(r)
 
-    def accept_result(self, my_action, other_action, result) -> None:
+    def accept_result(self, my_action: Action, other_action: Action, result: int) -> None:
         pass
 
     def get_name(self) -> str:
