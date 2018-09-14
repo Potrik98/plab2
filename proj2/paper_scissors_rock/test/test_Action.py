@@ -15,6 +15,15 @@ class ActionTest(unittest.TestCase):
         self.assertGreater(Action.PAPER, Action.ROCK)
         self.assertGreater(Action.ROCK, Action.SCISSORS)
         self.assertGreater(Action.SCISSORS, Action.PAPER)
+        self.assertLess(Action.ROCK, Action.PAPER)
+        self.assertLess(Action.PAPER, Action.SCISSORS)
+        self.assertLess(Action.SCISSORS, Action.ROCK)
+        self.assertFalse(Action.PAPER > Action.PAPER)
+        self.assertFalse(Action.ROCK > Action.ROCK)
+        self.assertFalse(Action.SCISSORS > Action.SCISSORS)
+        self.assertFalse(Action.PAPER < Action.PAPER)
+        self.assertFalse(Action.ROCK < Action.ROCK)
+        self.assertFalse(Action.SCISSORS < Action.SCISSORS)
 
 
 if __name__ == '__main__':
