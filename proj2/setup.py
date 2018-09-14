@@ -8,6 +8,9 @@ setup(name='paper_scissors_rock',
       author_email='potrik98@gmail.com',
       license='MIT',
       packages=['paper_scissors_rock'],
+      install_requires=[
+            'matplotlib'
+      ],
       test_suite='nose.collector',
       tests_require=['nose'],
       zip_safe=False)
