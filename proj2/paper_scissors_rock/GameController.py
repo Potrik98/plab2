@@ -34,13 +34,15 @@ class GameController:
                 + self._recent_score_weight * results[i]
             player2_recent_score[i + 1] = player2_recent_score[i] * (1 - self._recent_score_weight) \
                 - self._recent_score_weight * results[i]
-        return ([player1_total_score, player1_recent_score], [player2_total_score, player2_recent_score])
+        #return ([player1_total_score, player1_recent_score], [player2_total_score, player2_recent_score])
+        return ([player1_total_score], [player2_total_score])
     
     def _plot_results(self, player1_results: [[float]], player2_results: [[float]]) -> None:
         assert len(player1_results) == len(player2_results)
         for r1, r2, i in zip(player1_results, player2_results, range(len(player1_results))):
-            plt.plot(r1, label="Player 1, Series %d" % i)
-            plt.plot(r2, label="Player 2, Series %d" % i)
+            p1, = plt.plot(r1, label="Player 1, Series %d" % i)
+            p2, = plt.plot(r2, label="Player 2, Series %d" % i)
+            plt.legend(handles=[p1, p2])
         plt.xlabel("games")
         plt.ylabel("score")
         plt.show()
