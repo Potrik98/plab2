@@ -3,7 +3,7 @@ import unittest
 from paper_scissors_rock.Action import Action
 from paper_scissors_rock.StaticPlayer import StaticPlayer
 
-class ActionTest(unittest.TestCase):
+class StaticPlayerTest(unittest.TestCase):
     def test_choose_action(self):
         player = StaticPlayer(Action.PAPER)
         self.assertEqual(player.choose_action(), Action.PAPER)
