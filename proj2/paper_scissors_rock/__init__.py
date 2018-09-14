@@ -4,6 +4,7 @@ __all__ = [
     "GameSeries",
     "Player",
     "RandomPlayer",
+    "SequentialPlayer",
     "SimpleGame",
     "StaticPlayer"
     ]

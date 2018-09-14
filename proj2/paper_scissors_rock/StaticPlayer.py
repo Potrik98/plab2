@@ -14,4 +14,4 @@ class StaticPlayer(Player):
         pass
 
     def get_name(self) -> str:
-        return "Static Player of type %s" % self._action.name
+        return "Static Player (type: %s)" % self._action.name
