@@ -23,26 +23,38 @@ class GameController:
     
     def _process_results(self, results: [int]) -> ([[float]], [[float]]):
         number_of_games = len(results)
-        player1_total_score = [0] * (number_of_games + 1)
-        player2_total_score = [0] * (number_of_games + 1)
-        player1_recent_score = [0] * (number_of_games + 1)
-        player2_recent_score = [0] * (number_of_games + 1)
-        for i in range(number_of_games):
-            player1_total_score[i + 1] = (player1_total_score[i] * i + results[i]) / (i + 1)
-            player2_total_score[i + 1] = (player2_total_score[i] * i - results[i]) / (i + 1)
-            player1_recent_score[i + 1] = player1_recent_score[i] * (1 - self._recent_score_weight) \
-                + self._recent_score_weight * results[i]
-            player2_recent_score[i + 1] = player2_recent_score[i] * (1 - self._recent_score_weight) \
-                - self._recent_score_weight * results[i]
-        #return ([player1_total_score, player1_recent_score], [player2_total_score, player2_recent_score])
-        return ([player1_total_score], [player2_total_score])
+        total_score = [0] * (number_of_games + 1)
+        player1_win = [0] * (number_of_games + 1)
+        player2_win = [0] * (number_of_games + 1)
+        player1_wr = [0] * (number_of_games + 1)
+        player2_wr = [0] * (number_of_games + 1)
+        for i in range(1, number_of_games):
+            total_score[i + 1] = total_score[i] + results[i]
+            total_score[i] = total_score[i] / i
+            player1_win[i + 1] = player1_win[i]
+            player2_win[i + 1] = player2_win[i]
+            if results[i] == 1:
+                player1_win[i + 1] += 1
+            elif results[i] == -1:
+                player2_win[i + 1] += 1
+            total_wins = player1_win[i + 1] + player2_win[i + 1]
+            if total_wins > 0:
+                player1_wr[i + 1] = player1_win[i + 1] / total_wins
+                player2_wr[i + 1] = player2_win[i + 1] / total_wins
+        total_score[-1] = total_score[-1] / number_of_games
+
+        return ([total_score, player1_wr], [[-a for a in total_score], player2_wr],)
     
     def _plot_results(self, player1_results: [[float]], player2_results: [[float]]) -> None:
         assert len(player1_results) == len(player2_results)
+        labels = ["Score", "Win rate"]
+        h = []
         for r1, r2, i in zip(player1_results, player2_results, range(len(player1_results))):
-            p1, = plt.plot(r1, label="Player 1, Series %d" % i)
-            p2, = plt.plot(r2, label="Player 2, Series %d" % i)
-            plt.legend(handles=[p1, p2])
+            p1, = plt.plot(r1, label="Player 1 %s" % labels[i])
+            p2, = plt.plot(r2, label="Player 2 %s" % labels[i])
+            h.append(p1)
+            h.append(p2)
+        plt.legend(handles=h)
         plt.xlabel("games")
         plt.ylabel("score")
         plt.show()
