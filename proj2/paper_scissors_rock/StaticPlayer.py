@@ -1,6 +1,6 @@
 from paper_scissors_rock.Player import Player
-from paper_scissors_rock.Action import Action, ACTION_COUNT
-import random
+from paper_scissors_rock.Action import Action
+
 
 class StaticPlayer(Player):
     def __init__(self, action: Action):
@@ -10,7 +10,10 @@ class StaticPlayer(Player):
     def choose_action(self) -> Action:
         return self._action
 
-    def accept_result(self, my_action: Action, other_action: Action, result: int) -> None:
+    def accept_result(self,
+                      my_action: Action,
+                      other_action: Action,
+                      result: int) -> None:
         pass
 
     def get_name(self) -> str:

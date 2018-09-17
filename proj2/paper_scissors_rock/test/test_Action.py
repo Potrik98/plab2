@@ -2,6 +2,7 @@ import unittest
 
 from paper_scissors_rock.Action import Action
 
+
 class ActionTest(unittest.TestCase):
     def test_equal(self):
         self.assertEqual(Action.PAPER, Action.PAPER)

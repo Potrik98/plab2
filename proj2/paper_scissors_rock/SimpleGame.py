@@ -1,5 +1,6 @@
 from paper_scissors_rock.Player import Player
 
+
 class SimpleGame:
     def __init__(self, player1: Player, player2: Player):
         self._player1 = player1
@@ -21,4 +22,4 @@ class SimpleGame:
 
     def __str__(self):
         return "SimpleGame: %s vs %s, score: %d" % \
-        (self._player1.get_name(), self._player2.get_name(), self._score)
+            (self._player1.get_name(), self._player2.get_name(), self._score)

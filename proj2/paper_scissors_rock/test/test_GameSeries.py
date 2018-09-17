@@ -4,6 +4,7 @@ from paper_scissors_rock.Action import Action
 from paper_scissors_rock.StaticPlayer import StaticPlayer
 from paper_scissors_rock.GameSeries import GameSeries
 
+
 class SimpleGameTest(unittest.TestCase):
     def test_do_games_series_player_1_win(self):
         player1 = StaticPlayer(Action.PAPER)

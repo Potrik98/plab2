@@ -2,6 +2,7 @@ from enum import Enum, unique
 
 ACTION_COUNT = 3
 
+
 @unique
 class Action(Enum):
     PAPER = 0

@@ -1,6 +1,6 @@
 from paper_scissors_rock.Player import Player
 from paper_scissors_rock.Action import Action, ACTION_COUNT
-import random
+
 
 class MostUsedPlayer(Player):
     def __init__(self, start_action=Action.PAPER):
@@ -11,7 +11,10 @@ class MostUsedPlayer(Player):
         action = Action((expected_action + 1) % ACTION_COUNT)
         return action
 
-    def accept_result(self, my_action: Action, other_action: Action, result: int) -> None:
+    def accept_result(self,
+                      my_action: Action,
+                      other_action: Action,
+                      result: int) -> None:
         self._action_count[other_action.value] += 1
 
     def get_name(self) -> str:
