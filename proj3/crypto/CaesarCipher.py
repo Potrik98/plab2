@@ -1,4 +1,4 @@
-from crypto.Cipher import Cipher
+from crypto.Cipher import Cipher, alphabet, alphabet_length
 
 class CaesarCipher(Cipher):
     class Key(Cipher.Key):
@@ -9,7 +9,7 @@ class CaesarCipher(Cipher):
         super().__init__()
 
     def _encrypt_character(self, char):
-        return self._alphabet[(self._alphabet.index(char) + self._key._offset) % self._characters]
+        return alphabet[(alphabet.index(char) + self._key._offset) % alphabet_length]
 
     def _decrypt_character(self, char):
-        return self._alphabet[(self._alphabet.index(char) - self._key._offset) % self._characters]
+        return alphabet[(alphabet.index(char) - self._key._offset) % alphabet_length]

@@ -1,11 +1,10 @@
+alphabet = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+alphabet_length = len(alphabet)
+
 class Cipher:
     class Key:
         def __init__(self):
             raise NotImplementedError
-    
-    def __init__(self):
-        self._alphabet = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-        self._characters = len(self._alphabet)
 
     def set_key(self, key: Key) -> None:
         self._key = key
