@@ -35,7 +35,7 @@ def modular_inverse(a, m):
         # walked it through one time "too many". Therefore, return the values of the previous round:
         return previous_remainder, previous_x, previous_y
 
-    gcd_value, x, y = extended_gcd(a, m)
+    gcd_value, x, _ = extended_gcd(a, m)
     if gcd_value != 1:
         print('No inverse. gcd (%d, %d) is %d. Decoding is not unique. Choose another key than %d'
               % (a, m, math.gcd(a, m), a))
