@@ -18,8 +18,7 @@ def crack_caesar():
     filename = "word_list.txt"
     length = 3
     words = dict_utils.get_words_longer_than(filename, length)
-    key_gen = CaesarCipherKeyGenerator.CaesarCipherKeyGenerator()
-    cracker = Cracker.Cracker(cipher, key_gen, words)
+    cracker = Cracker.Cracker(cipher, words)
 
     cracker.brute_force(encrypted_text)
 
@@ -37,8 +36,7 @@ def crack_multiplication():
     filename = "word_list.txt"
     length = 3
     words = dict_utils.get_words_longer_than(filename, length)
-    key_gen = MultiplicationCipherKeyGenerator.MultiplicationCipherKeyGenerator()
-    cracker = Cracker.Cracker(cipher, key_gen, words)
+    cracker = Cracker.Cracker(cipher, words)
 
     cracker.brute_force(encrypted_text)
 
@@ -58,8 +56,7 @@ def crack_affine():
     filename = "word_list.txt"
     length = 3
     words = dict_utils.get_words_longer_than(filename, length)
-    key_gen = AffineCipherKeyGenerator.AffineCipherKeyGenerator()
-    cracker = Cracker.Cracker(cipher, key_gen, words)
+    cracker = Cracker.Cracker(cipher, words)
 
     cracker.brute_force(encrypted_text)
 
@@ -78,8 +75,7 @@ def crack_unbreakable():
     length = 3
     words = dict_utils.get_words_longer_than(filename, length)
     dictionary = dict_utils.get_complete_word_list(filename)
-    key_gen = UnbreakableCipherKeyGenerator.UnbreakableCipherKeyGenerator(words=dictionary)
-    cracker = Cracker.Cracker(cipher, key_gen, words)
+    cracker = Cracker.Cracker(cipher, words)
 
     cracker.brute_force(encrypted_text)
 

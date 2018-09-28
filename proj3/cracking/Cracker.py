@@ -1,17 +1,35 @@
 from crypto.Cipher import Cipher
+from crypto.AffineCipher import AffineCipher
+from crypto.CaesarCipher import CaesarCipher
+from crypto.MultiplicationCipher import MultiplicationCipher
+from crypto.UnbreakableCipher import UnbreakableCipher
 from cracking.KeyGenerator import KeyGenerator
+from cracking.AffineCipherKeyGenerator import AffineCipherKeyGenerator
+from cracking.CaesarCipherKeyGenerator import CaesarCipherKeyGenerator
+from cracking.MultiplicationCipherKeyGenerator import MultiplicationCipherKeyGenerator
+from cracking.UnbreakableCipherKeyGenerator import UnbreakableCipherKeyGenerator
+from cracking.dict_utils import get_words_longer_than
 import time
+
+def get_key_generator(cipher: Cipher) -> KeyGenerator:
+    if cipher.__class__ == AffineCipher:
+        return AffineCipherKeyGenerator()
+    if cipher.__class__ == CaesarCipher:
+        return CaesarCipherKeyGenerator()
+    if cipher.__class__ == MultiplicationCipher:
+        return MultiplicationCipherKeyGenerator()
+    if cipher.__class__ == UnbreakableCipher:
+        return UnbreakableCipherKeyGenerator()
 
 class Cracker:
     def __init__(self,
                  cipher: Cipher,
-                 key_gen: KeyGenerator,
-                 words: set):
+                 words=get_words_longer_than("word_list.txt", 3)):
         self._cipher = cipher
-        self._key_gen = key_gen
+        self._key_gen = get_key_generator(cipher)
         self._dict = words
     
-    def brute_force(self, text: str) -> None:
+    def brute_force(self, text: str) -> str:
         t0 = time.time()
         for key in self._key_gen:
             self._cipher.set_key(key)
@@ -25,7 +43,8 @@ class Cracker:
                 if score > 5:
                     t1 = time.time()
                     print("Time used: %.6fs" % (t1 - t0))
-                    return
+                    return decrypted
+        return ""
         t1 = time.time()
         print("Tried all combinations")
         print("Time used: %.6fs" % (t1 - t0))
