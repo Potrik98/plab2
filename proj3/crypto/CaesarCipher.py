@@ -6,6 +6,9 @@ class CaesarCipher(SimpleCipher):
         def __init__(self, offset: int):
             self._offset = offset
 
+        def __str__(self):
+            return "Caesar key: offset %d" % self._offset
+
     def __init__(self):
         super().__init__()
 

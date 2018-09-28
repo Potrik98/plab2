@@ -13,6 +13,9 @@ class UnbreakableCipher(Cipher):
         def get_reverse_code_value(self, position: int) -> int:
             return self._reverse_code[position % self._code_length]
 
+        def __str__(self):
+            return "Unbreakable key: code word: '%s'" % ''.join(map(lambda c: alphabet[c], self._code))
+
     def __init__(self):
         super().__init__()
 

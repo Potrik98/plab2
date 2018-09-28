@@ -7,6 +7,9 @@ class MultiplicationCipher(SimpleCipher):
         def __init__(self, factor: int):
             self._factor = factor
             self._inverse = modular_inverse(factor, alphabet_length)
+        
+        def __str__(self):
+            return "Multiplication key: factor %d, inverse %d" % (self._factor, self._inverse)
 
     def __init__(self):
         super().__init__()
