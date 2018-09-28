@@ -1,8 +1,9 @@
+from crypto.SimpleCipher import SimpleCipher
 from crypto.Cipher import Cipher, alphabet, alphabet_length
 from crypto.MultiplicationCipher import MultiplicationCipher
 from crypto.CaesarCipher import CaesarCipher
 
-class AffineCipher(Cipher):
+class AffineCipher(SimpleCipher):
     class Key(Cipher.Key):
         def __init__(self,
                      caesar_key: CaesarCipher.Key,

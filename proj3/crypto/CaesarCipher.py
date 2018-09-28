@@ -1,6 +1,7 @@
+from crypto.SimpleCipher import SimpleCipher
 from crypto.Cipher import Cipher, alphabet, alphabet_length
 
-class CaesarCipher(Cipher):
+class CaesarCipher(SimpleCipher):
     class Key(Cipher.Key):
         def __init__(self, offset: int):
             self._offset = offset

@@ -1,7 +1,8 @@
 from crypto.Cipher import Cipher, alphabet, alphabet_length
+from crypto.SimpleCipher import SimpleCipher
 from crypto.crypto_utils import modular_inverse
 
-class MultiplicationCipher(Cipher):
+class MultiplicationCipher(SimpleCipher):
     class Key(Cipher.Key):
         def __init__(self, factor: int):
             self._factor = factor
