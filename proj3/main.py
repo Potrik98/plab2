@@ -42,4 +42,27 @@ def crack_multiplication():
 
     cracker.brute_force(encrypted_text)
 
+def crack_affine():
+    cipher = AffineCipher.AffineCipher()
+    caesar_key = CaesarCipher.CaesarCipher.Key(offset=23)
+    multi_key = MultiplicationCipher.MultiplicationCipher.Key(factor=33)
+    key = AffineCipher.AffineCipher.Key(caesar_key, multi_key)
+    cipher.set_key(key)
+
+    encrypted_text = cipher.encrypt(initial_text)
+    print("Encrypted text:")
+    print(encrypted_text)
+
+    print("Starting brute force\n")
+
+    filename = "word_list.txt"
+    length = 3
+    words = dict_utils.get_words_longer_than(filename, length)
+    key_gen = AffineCipherKeyGenerator.AffineCipherKeyGenerator()
+    cracker = Cracker.Cracker(cipher, key_gen, words)
+
+    cracker.brute_force(encrypted_text)
+
+crack_caesar()
 crack_multiplication()
+crack_affine()
