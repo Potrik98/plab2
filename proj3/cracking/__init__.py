@@ -3,4 +3,5 @@ __all__ = [
     "Cracker",
     "dict_utils",
     "KeyGenerator",
+    "MultiplicationCipherKeyGenerator",
 ]
