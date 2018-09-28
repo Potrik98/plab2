@@ -16,11 +16,7 @@ def crack_caesar():
 
     print("Starting brute force\n")
 
-    filename = "word_list.txt"
-    length = 3
-    words = dict_utils.get_words_longer_than(filename, length)
-    cracker = Cracker.Cracker(cipher, words)
-
+    cracker = Cracker.Cracker(cipher)
     cracker.brute_force(encrypted_text)
 
 def crack_multiplication():
@@ -34,11 +30,7 @@ def crack_multiplication():
 
     print("Starting brute force\n")
 
-    filename = "word_list.txt"
-    length = 3
-    words = dict_utils.get_words_longer_than(filename, length)
-    cracker = Cracker.Cracker(cipher, words)
-
+    cracker = Cracker.Cracker(cipher)
     cracker.brute_force(encrypted_text)
 
 def crack_affine():
@@ -54,11 +46,7 @@ def crack_affine():
 
     print("Starting brute force\n")
 
-    filename = "word_list.txt"
-    length = 3
-    words = dict_utils.get_words_longer_than(filename, length)
-    cracker = Cracker.Cracker(cipher, words)
-
+    cracker = Cracker.Cracker(cipher)
     cracker.brute_force(encrypted_text)
 
 def crack_unbreakable():
@@ -72,18 +60,13 @@ def crack_unbreakable():
 
     print("Starting brute force\n")
 
-    filename = "word_list.txt"
-    length = 3
-    words = dict_utils.get_words_longer_than(filename, length)
-    dictionary = dict_utils.get_complete_word_list(filename)
-    cracker = Cracker.Cracker(cipher, words)
-
+    cracker = Cracker.Cracker(cipher)
     cracker.brute_force(encrypted_text)
 
-#crack_caesar()
-#crack_multiplication()
-#crack_affine()
-#crack_unbreakable()
+# crack_caesar()
+# crack_multiplication()
+# crack_affine()
+# crack_unbreakable()
 
 cipher = AffineCipher.AffineCipher()
 key = AffineCipher.AffineCipher.Key(
