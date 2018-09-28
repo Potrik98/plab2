@@ -5,4 +5,5 @@ __all__ = [
     "dict_utils",
     "KeyGenerator",
     "MultiplicationCipherKeyGenerator",
+    "UnbreakableCipherKeyGenerator",
 ]

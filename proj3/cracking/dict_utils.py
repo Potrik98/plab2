@@ -5,7 +5,8 @@ def get_complete_word_list(filename: str) -> set:
     file = open(filename, "r")
     for line in file:
         w = line.strip()
-        words.add(w)
+        if len(w) > 0:
+            words.add(w)
     
     return words
 

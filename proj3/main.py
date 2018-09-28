@@ -63,6 +63,27 @@ def crack_affine():
 
     cracker.brute_force(encrypted_text)
 
+def crack_unbreakable():
+    cipher = UnbreakableCipher.UnbreakableCipher()
+    key = UnbreakableCipher.UnbreakableCipher.Key(code_word="secret")
+    cipher.set_key(key)
+
+    encrypted_text = cipher.encrypt(initial_text)
+    print("Encrypted text:")
+    print(encrypted_text)
+
+    print("Starting brute force\n")
+
+    filename = "word_list.txt"
+    length = 3
+    words = dict_utils.get_words_longer_than(filename, length)
+    dictionary = dict_utils.get_complete_word_list(filename)
+    key_gen = UnbreakableCipherKeyGenerator.UnbreakableCipherKeyGenerator(words=dictionary)
+    cracker = Cracker.Cracker(cipher, key_gen, words)
+
+    cracker.brute_force(encrypted_text)
+
 crack_caesar()
 crack_multiplication()
 crack_affine()
+crack_unbreakable()
