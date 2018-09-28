@@ -15,7 +15,7 @@ class Cracker:
             self._cipher.set_key(key)
             decrypted = self._cipher.decrypt(text)
             score = 0
-            for word in decrypted:
+            for word in decrypted.split():
                 if word in self._dict:
                     score += 1
             if score > 0:

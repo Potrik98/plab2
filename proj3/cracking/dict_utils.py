@@ -9,5 +9,5 @@ def get_complete_word_list(filename: str) -> set:
     
     return words
 
-def get_long_words_word_list(filename: str, length=3) -> set:
+def get_words_longer_than(filename: str, length=3) -> set:
     return set(filter(lambda w: len(w) > length, get_complete_word_list(filename)))
