@@ -6,4 +6,4 @@ class Sender(Person):
         super().__init__(cipher)
 
     def operate_cipher(self, text: str) -> str:
-        return self._cipher.encrypt(str)
+        return self._cipher.encrypt(text)

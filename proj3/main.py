@@ -1,5 +1,6 @@
 from crypto import *
 from cracking import *
+from message import *
 
 # initial text is today's featured article on wikipedia
 initial_text = "Myst IV: Revelation is an adventure video game, the fourth installment in the Myst series, developed and published by Ubisoft. Revelation was the first game in the series released on a DVD-ROM format; a multiple CD-ROM version was not produced as it would have taken twelve compact discs to fit the data.[1] Like Myst III: Exile, Revelation combines pre-rendered graphics with digital video, but also features real-time 3D effects for added realism."
@@ -79,7 +80,22 @@ def crack_unbreakable():
 
     cracker.brute_force(encrypted_text)
 
-crack_caesar()
-crack_multiplication()
-crack_affine()
-crack_unbreakable()
+#crack_caesar()
+#crack_multiplication()
+#crack_affine()
+#crack_unbreakable()
+
+cipher = AffineCipher.AffineCipher()
+key = AffineCipher.AffineCipher.Key(
+    CaesarCipher.CaesarCipher.Key(offset=4),
+    MultiplicationCipher.MultiplicationCipher.Key(factor=13)
+)
+s = Sender.Sender(cipher)
+r = Receiver.Receiver(cipher)
+s.set_key(key)
+r.set_key(key)
+enc = s.operate_cipher(initial_text)
+dec = r.operate_cipher(enc)
+print(dec == initial_text)
+h = Hacker.Hacker()
+h.brute_force(enc, cipher)
