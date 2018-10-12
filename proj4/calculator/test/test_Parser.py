@@ -28,6 +28,22 @@ class ParserTest(unittest.TestCase):
         actual_result = parser.shunting_yard(input)
         self.assertEqual(actual_result, expected_result)
 
+    def test_parser(self):
+        input = "exp ( 1 + 2 * 3 )"
+        expected_output = [
+            functions['exp'],
+            '(',
+            1,
+            functions['+'],
+            2,
+            functions['*'],
+            3,
+            ')'
+        ]
+        parser = Parser()
+        actual_output = parser.parse_string(input)
+        self.assertEqual(actual_output, expected_output)
+
 
 if __name__ == '__main__':
     unittest.main()

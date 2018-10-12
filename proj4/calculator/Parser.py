@@ -1,6 +1,7 @@
 import numbers
 
 from data.DataStructures import Stack, Queue
+from calculator.Calculator import functions
 
 class Parser:
     def __init__(self):
@@ -29,3 +30,19 @@ class Parser:
             output.enqueue(operator_stack.pop())
         
         return output
+
+    def _get_number(self, s: str):
+        try:
+            return float(s)
+        except ValueError:
+            return None
+
+    def parse_string(self, input: str):
+        result = []
+        for token in input.split():
+            n = self._get_number(token)
+            if n != None:
+                result.append(n)
+            else:
+                result.append(functions[token])
+        return result

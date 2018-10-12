@@ -13,7 +13,13 @@ functions = {
     'add': Function(np.add, 2, 2),
     'sub': Function(np.subtract, 2, 2),
     'mul': Function(np.multiply, 2, 1),
-    'div': Function(np.multiply, 2, 1)
+    'div': Function(np.multiply, 2, 1),
+    '+': Function(np.add, 2, 2),
+    '-': Function(np.subtract, 2, 2),
+    '*': Function(np.multiply, 2, 1),
+    '/': Function(np.multiply, 2, 1),
+    '(': '(',
+    ')': ')'
 }
 
 class Calculator:
