@@ -22,7 +22,12 @@ functions = {
     ')': ')'
 }
 
+from calculator.Parser import Parser
+
 class Calculator:
+    def __init__(self):
+        self._parser = Parser()
+
     def evaluate_rpn(self, input_queue: Queue):
         stack = Stack()
         while not input_queue.is_emtpy():
@@ -32,3 +37,8 @@ class Calculator:
             else:
                 stack.push(token.execute(stack))
         return stack.pop()
+
+    def evaluate_string(self, input: str):
+        tokens = self._parser.parse_string(input)
+        input_queue = self._parser.shunting_yard(tokens)
+        return self.evaluate_rpn(input_queue)
