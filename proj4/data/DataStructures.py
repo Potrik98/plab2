@@ -56,6 +56,22 @@ class LinkedList:
     def get_first(self):
         return self._first._value
 
+    def __eq__(self, other):
+        n1, n2 = self._first, other._first
+        while n1 != None and n2 != None:
+            if n1._value != n2._value:
+                return False
+            n1, n2 = n1._next, n2._next
+        return n1 == n2
+
+    def __str__(self):
+        n = self._first
+        r = "Values: "
+        while n != None:
+            r += str(n._value) + ", "
+            n = n._next
+        return r
+
 
 class Stack:
     def __init__(self):
@@ -73,6 +89,12 @@ class Stack:
     def is_emtpy(self):
         return self._values.is_empty()
 
+    def __eq__(self, other):
+        return self._values == other._values
+
+    def __str__(self):
+        return self._values.__str__()
+
 
 class Queue:
     def __init__(self):
@@ -89,3 +111,9 @@ class Queue:
     
     def is_emtpy(self):
         return self._values.is_empty()
+
+    def __eq__(self, other):
+        return self._values == other._values
+
+    def __str__(self):
+        return self._values.__str__()
