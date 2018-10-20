@@ -52,6 +52,7 @@ class LoggedInState(State):
             # execute the action with the right identifier
             if self._action_identifier not in self._actions:
                 # invalid action, abort
+                self._fsm.show_error_lights()
                 return LoggedInState(self._fsm)
             else:
                 # Go to the action state
@@ -100,9 +101,11 @@ class InputCodeState(State):
             # A code of the right length has been inputted
             if self._code_so_far == self._correct_code:
                 # Code is correct
+                self._fsm.show_passcode_accepted_lights()
                 return self._next_state
             else:
                 # Code is incorrect, return to the initial state
+                self._fsm.show_error_lights()
                 return RecieveInputState(self._fsm)
         else:
             # Code hasn't been completed yet,
