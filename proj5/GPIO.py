@@ -18,7 +18,7 @@ def light_led(which, duration):
         elif pattern[n] == 1:
             GPIO.setup(lightpins[n], GPIO.OUT)
             GPIO.output(lightpins[n], GPIO.HIGH)
-    time.sleep(duration)
+    time.sleep(duration * 1000)
     for n in range(3):
         GPIO.setup(lightpins[n], GPIO.IN)
 
