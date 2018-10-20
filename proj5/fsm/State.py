@@ -14,6 +14,39 @@ class State:
 
 
 #
+# This state is entered after a correct key code is entered
+# When in the logged in state, the user can do any action
+# identified with a string of numbers.
+# To execute an action, type any string of numbers,
+# and end with '#' to execute, or '*' (or anything else)
+# to abort entering the action identifier.
+#
+class LoggedInState(State):
+    def __init__(self, fsm: FSM):
+        super().__init__(fsm)
+        self._actions = {
+            '0': RecieveInputState(fsm)
+        }
+        self._action_identifier = ""
+
+    def process_input(self, input: str) -> State:
+        if is_int(input):
+            self._action_identifier += input
+            return self
+        elif input == '#':
+            # execute the action with the right identifier
+            if self._action_identifier not in self._actions:
+                # invalid action, abort
+                return LoggedInState(self._fsm)
+            else:
+                # Go to the action state
+                return self._actions[self._action_identifier]
+        else:
+            # abort
+            return LoggedInState(self._fsm)
+
+
+#
 # This state is the initial state of the fsm,
 # and will transition to the other states on input
 #
