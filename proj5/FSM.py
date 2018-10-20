@@ -1,11 +1,10 @@
-class State:
-    #
-    # Processes the input and returns the next state
-    #
-    def process_input(self, input: str) -> State:
-        raise NotImplementedError
+from State import State
 
 
 class FSM:
     def __init__(self):
         self._state: State
+        self._correct_code = "666"
+
+    def get_correct_code(self) -> str:
+        return self._correct_code
