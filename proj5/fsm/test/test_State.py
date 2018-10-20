@@ -1,5 +1,10 @@
 import unittest
-from fsm.State import RecieveInputState, InputCodeState, ChangeCodeState
+from fsm.State import (
+    RecieveInputState,
+    InputCodeState,
+    ChangeCodeState,
+    LoggedInState
+)
 from fsm.FSM import FSM
 
 
@@ -54,6 +59,37 @@ class StateTest(unittest.TestCase):
         state = state.process_input('2')
         state = state.process_input('3')  # incorrect confirmation of the code
         # Incorrect confirmation should return to the initial state
+        self.assertIsInstance(state, RecieveInputState)
+
+    def test_LoggedInState_do_action(self):
+        fsm = FSM()
+        state = LoggedInState(fsm)
+        state = state.process_input('0')
+        state = state.process_input('#')
+        # Action 0 should return to the initial state
+        self.assertIsInstance(state, RecieveInputState)
+
+    def test_LoggedInState_abort(self):
+        fsm = FSM()
+        state = LoggedInState(fsm)
+        state = state.process_input('1')
+        state = state.process_input('*')  # Abort
+        self.assertIsInstance(state, LoggedInState)
+        state = state.process_input('0')
+        state = state.process_input('#')
+        # Action 0 should return to the initial state
+        self.assertIsInstance(state, RecieveInputState)
+
+    def test_LoggedInState_invalid_action(self):
+        fsm = FSM()
+        state = LoggedInState(fsm)
+        state = state.process_input('1')
+        state = state.process_input('1')
+        state = state.process_input('#')  # Abort, invalid action
+        self.assertIsInstance(state, LoggedInState)
+        state = state.process_input('0')
+        state = state.process_input('#')
+        # Action 0 should return to the initial state
         self.assertIsInstance(state, RecieveInputState)
 
 
