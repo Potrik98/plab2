@@ -10,7 +10,7 @@ def setup():
     GPIO.setwarnings(False)
 
 
-def light_led(which, duration):
+def led_on(which):
     pattern = lights[which]
     for n in range(3):
         if pattern[n] == -1:
@@ -19,9 +19,17 @@ def light_led(which, duration):
         elif pattern[n] == 1:
             GPIO.setup(lightpins[n], GPIO.OUT)
             GPIO.output(lightpins[n], GPIO.HIGH)
-    time.sleep(duration)
+
+
+def led_off():
     for n in range(3):
         GPIO.setup(lightpins[n], GPIO.IN)
+
+
+def light_led(which, duration):
+    led_on(which)
+    time.sleep(duration)
+    led_off()
 
 
 def twinkle_all_leds(duration):
