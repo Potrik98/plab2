@@ -24,7 +24,8 @@ class StateTest(unittest.TestCase):
         state = state.process_input('1')
         state = state.process_input('2')
         state = state.process_input('3')
-        self.assertIsNone(state)  # TODO: Change this to the logged in state
+        # Correct code input should result in the logged in state
+        self.assertIsInstance(state, LoggedInState)
 
     def test_InputCodeState_incorrect_code(self):
         fsm = FSM()
