@@ -39,8 +39,9 @@ class LoggedInState(State):
     def __init__(self, fsm: FSMController):
         super().__init__(fsm)
         self._actions = {
-            '0': SleepingState(fsm),
-            '1': GetLedIdState(fsm)
+            '0': SleepingState,
+            '1': GetLedIdState,
+            '2': ChangeCodeState
         }
         self._action_identifier = ""
 
@@ -56,9 +57,7 @@ class LoggedInState(State):
                 return LoggedInState(self._fsm)
             else:
                 # Go to the action state
-                action_state = self._actions[self._action_identifier]
-                action_state.__init__(self._fsm)
-                return action_state
+                return self._actions[self._action_identifier](self._fsm)
         else:
             # abort
             return LoggedInState(self._fsm)
