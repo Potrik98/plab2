@@ -7,18 +7,18 @@ from fsm.State import (
     GetLedIdState,
     GetLedDurationState
 )
-from fsm.FSM import FSM
+from fsm.FSM import FSMController
 
 
 class StateTest(unittest.TestCase):
     def test_RecieveInputState_number_input(self):
-        fsm = FSM()
+        fsm = FSMController()
         state = RecieveInputState(fsm)
         next_state = state.process_input('1')
         self.assertIsInstance(next_state, InputCodeState)
 
     def test_InputCodeState_correct_code(self):
-        fsm = FSM()
+        fsm = FSMController()
         correct_code = "123"
         state = InputCodeState(fsm, correct_code)
         state = state.process_input('1')
@@ -28,7 +28,7 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(state, LoggedInState)
 
     def test_InputCodeState_incorrect_code(self):
-        fsm = FSM()
+        fsm = FSMController()
         correct_code = "123"
         state = InputCodeState(fsm, correct_code)
         state = state.process_input('1')
@@ -37,7 +37,7 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(state, RecieveInputState)
 
     def test_ChangeCodeState_correct_confirmation(self):
-        fsm = FSM()
+        fsm = FSMController()
         state = ChangeCodeState(fsm)
         state = state.process_input('4')
         state = state.process_input('5')
@@ -52,7 +52,7 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(next_state, InputCodeState)
 
     def test_ChangeCodeState_incorrect_confirmation(self):
-        fsm = FSM()
+        fsm = FSMController()
         state = ChangeCodeState(fsm)
         state = state.process_input('4')
         state = state.process_input('5')
@@ -65,7 +65,7 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(state, RecieveInputState)
 
     def test_LoggedInState_do_action(self):
-        fsm = FSM()
+        fsm = FSMController()
         state = LoggedInState(fsm)
         state = state.process_input('0')
         state = state.process_input('#')
@@ -78,7 +78,7 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(state, GetLedIdState)
 
     def test_LoggedInState_abort(self):
-        fsm = FSM()
+        fsm = FSMController()
         state = LoggedInState(fsm)
         state = state.process_input('1')
         state = state.process_input('*')  # Abort
@@ -89,7 +89,7 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(state, RecieveInputState)
 
     def test_LoggedInState_invalid_action(self):
-        fsm = FSM()
+        fsm = FSMController()
         state = LoggedInState(fsm)
         state = state.process_input('1')
         state = state.process_input('1')
@@ -101,7 +101,7 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(state, RecieveInputState)
 
     def test_SetLedProcess(self):
-        fsm = FSM()
+        fsm = FSMController()
         state = GetLedIdState(fsm)
         state = state.process_input('1')
         state = state.process_input('#')  # End led id input

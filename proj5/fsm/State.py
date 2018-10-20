@@ -1,9 +1,9 @@
 from fsm.utils import is_int
-from fsm.FSM import FSM
+from fsm.FSM import FSMController
 
 
 class State:
-    def __init__(self, fsm: FSM):
+    def __init__(self, fsm: FSMController):
         self._fsm = fsm
 
     #
@@ -22,7 +22,7 @@ class State:
 # to abort entering the action identifier.
 #
 class LoggedInState(State):
-    def __init__(self, fsm: FSM):
+    def __init__(self, fsm: FSMController):
         super().__init__(fsm)
         self._actions = {
             '0': RecieveInputState(fsm),
@@ -67,7 +67,7 @@ class RecieveInputState(State):
 # before checking it
 #
 class InputCodeState(State):
-    def __init__(self, fsm: FSM, correct_code: str):
+    def __init__(self, fsm: FSMController, correct_code: str):
         super().__init__(fsm)
         self._correct_code = correct_code
         self._code_so_far = ""
@@ -103,7 +103,7 @@ class InputCodeState(State):
 # else we will return to the initial state if incorrect.
 #
 class ConfirmCodeState(InputCodeState):
-    def __init__(self, fsm: FSM, correct_code: str):
+    def __init__(self, fsm: FSMController, correct_code: str):
         super().__init__(fsm, correct_code)
         self._next_state = SetCodeState(fsm, correct_code)
 
@@ -113,7 +113,7 @@ class ConfirmCodeState(InputCodeState):
 # The code must be confirmed afterwards.
 #
 class ChangeCodeState(State):
-    def __init__(self, fsm: FSM):
+    def __init__(self, fsm: FSMController):
         super().__init__(fsm)
         self._code_so_far = ""
         self._parent = ChangeCodeState
@@ -134,7 +134,7 @@ class ChangeCodeState(State):
 # and returns to the initial state
 #
 class SetCodeState(State):
-    def __init__(self, fsm: FSM, new_code: str):
+    def __init__(self, fsm: FSMController, new_code: str):
         super().__init__(fsm)
         fsm.set_correct_code(new_code)
 
@@ -148,7 +148,7 @@ class SetCodeState(State):
 # in order to set it
 #
 class GetLedIdState(State):
-    def __init__(self, fsm: FSM):
+    def __init__(self, fsm: FSMController):
         super().__init__(fsm)
         self._led_id = ""
 
@@ -169,7 +169,7 @@ class GetLedIdState(State):
 # The duration is the number of seconds
 #
 class GetLedDurationState(State):
-    def __init__(self, fsm: FSM, led_id: int):
+    def __init__(self, fsm: FSMController, led_id: int):
         super().__init__(fsm)
         self._led_id = led_id
         self._duration = ""
@@ -181,5 +181,5 @@ class GetLedDurationState(State):
             return self
         else:
             # Duration input complete
-            # TODO: set the led
+            self._fsm.set_led(self._led_id, int(self._duration))
             return LoggedInState(self._fsm)  # Return to the logged in state
