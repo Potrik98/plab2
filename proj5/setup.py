@@ -1,8 +1,8 @@
 from setuptools import setup
 
-setup(name='calculator',
+setup(name='keypad',
       version='0.1',
-      description='calculator',
+      description='keypad',
       url='http://github.com/potrik98/plab2',
       author='Erling Rorvik',
       author_email='potrik98@gmail.com',
@@ -10,5 +10,5 @@ setup(name='calculator',
       packages=['fsm'],
       install_requires=[],
       test_suite='nose.collector',
-      tests_require=['nose'],
+      tests_require=['nose', 'mock'],
       zip_safe=False)

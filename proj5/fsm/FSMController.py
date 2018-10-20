@@ -22,3 +22,9 @@ class FSMController:
 
     def show_shutdown_lights(self) -> None:
         pass  # TODO
+
+    def show_passcode_accepted_lights(self) -> None:
+        pass  # TODO
+
+    def show_error_lights(self) -> None:
+        pass  # TODO

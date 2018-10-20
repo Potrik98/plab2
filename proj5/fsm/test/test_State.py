@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 from fsm.State import (
     RecieveInputState,
     InputCodeState,
@@ -101,15 +102,53 @@ class StateTest(unittest.TestCase):
         # Action 0 should return to the sleeping state
         self.assertIsInstance(state, SleepingState)
 
-    def test_SetLedProcess(self):
+    def test_login_lights(self):
+        fsm = FSMController()
+        correct_code = "123"
+        state = InputCodeState(fsm, correct_code)
+        with patch.object(fsm, 'show_passcode_accepted_lights') as mock:
+            state = state.process_input('1')
+            state = state.process_input('2')
+            state = state.process_input('3')
+        mock.assert_called_once_with()
+
+    def test_login_failed_lights(self):
+        fsm = FSMController()
+        correct_code = "123"
+        state = InputCodeState(fsm, correct_code)
+        with patch.object(fsm, 'show_error_lights') as mock:
+            state = state.process_input('6')
+            state = state.process_input('6')
+            state = state.process_input('6')
+        mock.assert_called_once_with()
+
+    def test_startup_lights(self):
+        fsm = FSMController()
+        state = SleepingState(fsm)
+        with patch.object(fsm, 'show_startup_lights') as mock:
+            state = state.process_input('1')
+        mock.assert_called_once_with()
+
+    def test_shutdown_lights(self):
+        fsm = FSMController()
+        state = LoggedInState(fsm)
+        with patch.object(fsm, 'show_shutdown_lights') as mock:
+            state = state.process_input('0')
+            state = state.process_input('#')
+        mock.assert_called_once_with()
+
+    def test_led_lights(self):
         fsm = FSMController()
         state = GetLedIdState(fsm)
-        state = state.process_input('1')
-        state = state.process_input('#')  # End led id input
-        self.assertIsInstance(state, GetLedDurationState)
-        self.assertEqual(state._led_id, 1)  # LED id should be 1
-        state = state.process_input("5")
-        state = state.process_input("#")  # End led duration input
+        with patch.object(fsm, 'set_led') as mock:
+            state = state.process_input('1')
+            state = state.process_input('#')  # End led id input
+            self.assertIsInstance(state, GetLedDurationState)
+            self.assertEqual(state._led_id, 1)  # LED id should be 1
+            state = state.process_input("5")
+            state = state.process_input("#")  # End led duration input
+        # set led should be called with id 1 and duration 5
+        mock.assert_called_once_with(1, 5)
         # Should return to the logged in state
         self.assertIsInstance(state, LoggedInState)
 
