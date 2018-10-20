@@ -49,7 +49,7 @@ class InputCodeState(State):
             # A code of the right length has been inputted
             if self._code_so_far == self._correct_code:
                 # Code is correct
-                pass  # TODO: return next state
+                return None  # TODO: return next state
             else:
                 # Code is incorrect, return to the initial state
                 return RecieveInputState(self._fsm)
