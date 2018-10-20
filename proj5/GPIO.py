@@ -37,4 +37,6 @@ def power_down_leds(duration):
     for n in range(6):
         light_led(((5 - n) * 2) % 5, duration)
 
+        
+setup()
 twinkle_all_leds(3)
