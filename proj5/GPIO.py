@@ -40,4 +40,4 @@ def power_down_leds(duration):
 
 
 setup()
-twinkle_all_leds(3) #Forgot to push
+twinkle_all_leds(1) #Forgot to push
