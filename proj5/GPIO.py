@@ -1,7 +1,7 @@
 import time
 import RPi.GPIO as GPIO
 
-lightpins = [4, 5, 6]
+lightpins = [18, 23, 24]
 lights = [[1, -1, 0], [-1, 1, 0], [0, 1, -1], [0, -1, 1], [1, 0, -1], [-1, 0, 1]]
 
 
