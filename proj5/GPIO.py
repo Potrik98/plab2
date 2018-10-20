@@ -41,4 +41,7 @@ def power_down_leds(duration):
 
 setup()
 while True:
-    light_led(0, 1000)
+    time.sleep(2)
+    GPIO.output(18, GPIO.HIGH)
+    time.sleep(2)
+    GPIO.output(18, GPIO.LOW)
