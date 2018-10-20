@@ -13,3 +13,9 @@ print(calc.evaluate_string(a))
 
 a = "sin ( 1 * 2 )"
 print(calc.evaluate_string(a))
+
+a = "2 - -1"
+print(calc.evaluate_string(a))
+
+a = "1 / 2"
+print(calc.evaluate_string(a))

@@ -8,6 +8,8 @@ class Function:
         args = []
         for _ in range(self._arg_count):
             args.append(stack.pop())
+        args.reverse()
+        print(args)
         return self._function(*args)
 
     def __gt__(self, other):
