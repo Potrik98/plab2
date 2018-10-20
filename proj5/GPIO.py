@@ -1,7 +1,7 @@
 import time
 import RPi.GPIO as GPIO
 
-lightpins = [1, 2, 3]
+lightpins = [2, 3, 4]
 lights = [[1, -1, 0], [-1, 1, 0], [0, 1, -1], [0, -1, 1], [1, 0, -1], [-1, 0, 1]]
 
 
@@ -37,4 +37,4 @@ def power_down_leds(duration):
     for n in range(6):
         light_led(((5 - n) * 2) % 5, duration)
 
-
+twinkle_all_leds(3)
