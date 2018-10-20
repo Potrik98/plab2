@@ -1,5 +1,5 @@
 import time
-import fake_rpi.RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 lightpins = [18, 23, 24]
 lights = [[1, -1, 0], [-1, 1, 0], [0, 1, -1], [0, -1, 1], [1, 0, -1], [-1, 0, 1]]
