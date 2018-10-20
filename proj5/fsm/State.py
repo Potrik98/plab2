@@ -73,7 +73,7 @@ class InputCodeState(State):
         self._code_so_far = ""
         self._inputs_so_far = 0
         self._code_length = len(self._correct_code)
-        self._next_state = None  # TODO: change this to the next state
+        self._next_state = LoggedInState(fsm)
 
     def process_input(self, input: str) -> State:
         if not is_int(input):
