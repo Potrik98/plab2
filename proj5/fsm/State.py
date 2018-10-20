@@ -25,7 +25,8 @@ class LoggedInState(State):
     def __init__(self, fsm: FSM):
         super().__init__(fsm)
         self._actions = {
-            '0': RecieveInputState(fsm)
+            '0': RecieveInputState(fsm),
+            '1': GetLedIdState(fsm)
         }
         self._action_identifier = ""
 
@@ -140,3 +141,45 @@ class SetCodeState(State):
     def process_input(self, input: str) -> State:
         # Returning to the initial state
         return RecieveInputState(self._fsm).process_input(input)
+
+
+#
+# This state gets the led id from input
+# in order to set it
+#
+class GetLedIdState(State):
+    def __init__(self, fsm: FSM):
+        super().__init__(fsm)
+        self._led_id = ""
+
+    def process_input(self, input: str) -> State:
+        if is_int(input):
+            # Append the input to the led
+            self._led_id += input
+            return self
+        else:
+            # Duration input complete
+            # Proceed to the get duration state
+            return GetLedDurationState(self._fsm, int(self._led_id))
+
+
+#
+# This state gets the led duration from input
+# and sets the led
+# The duration is the number of seconds
+#
+class GetLedDurationState(State):
+    def __init__(self, fsm: FSM, led_id: int):
+        super().__init__(fsm)
+        self._led_id = led_id
+        self._duration = ""
+
+    def process_input(self, input: str) -> State:
+        if is_int(input):
+            # Append the input to the duration
+            self._duration += input
+            return self
+        else:
+            # Duration input complete
+            # TODO: set the led
+            return LoggedInState(self._fsm)  # Return to the logged in state
