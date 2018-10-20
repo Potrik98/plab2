@@ -44,6 +44,12 @@ class LedController:
                 self._hold_led(n, duration / 6)
         self._resume_state()
 
+    def error_leds(self):
+        for _ in range(10):
+            for n in range(2):
+                self._hold_led(n, 0.1)
+        self._resume_state()
+
     def power_up_leds(self, duration):
         for _ in range(3):
             for n in range(6):
