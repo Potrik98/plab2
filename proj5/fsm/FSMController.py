@@ -32,4 +32,4 @@ class FSMController:
         self._led_controller.twinkle_all_leds(3, 0.4)
 
     def show_error_lights(self) -> None:
-        pass  # TODO
+        self._led_controller.error_leds()
