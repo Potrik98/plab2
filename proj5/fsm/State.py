@@ -1,5 +1,5 @@
 from fsm.utils import is_int
-from fsm.FSM import FSMController
+from fsm.FSMController import FSMController
 
 
 class State:
@@ -14,6 +14,20 @@ class State:
 
 
 #
+# This is the initial sleeping state
+#
+class SleepingState(State):
+    def __init__(self, fsm: FSMController):
+        super().__init__(fsm)
+        self._fsm.show_shutdown_lights()
+
+    def process_input(self, input: str) -> State:
+        # Press any key to wake up
+        self._fsm.show_startup_lights()
+        return RecieveInputState(self._fsm)
+
+
+#
 # This state is entered after a correct key code is entered
 # When in the logged in state, the user can do any action
 # identified with a string of numbers.
@@ -25,7 +39,7 @@ class LoggedInState(State):
     def __init__(self, fsm: FSMController):
         super().__init__(fsm)
         self._actions = {
-            '0': RecieveInputState(fsm),
+            '0': SleepingState(fsm),
             '1': GetLedIdState(fsm)
         }
         self._action_identifier = ""
@@ -41,7 +55,9 @@ class LoggedInState(State):
                 return LoggedInState(self._fsm)
             else:
                 # Go to the action state
-                return self._actions[self._action_identifier]
+                action_state = self._actions[self._action_identifier]
+                action_state.__init__(self._fsm)
+                return action_state
         else:
             # abort
             return LoggedInState(self._fsm)
