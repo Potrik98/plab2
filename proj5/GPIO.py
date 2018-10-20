@@ -40,7 +40,5 @@ def power_down_leds(duration):
 
 
 setup()
-power_down_leds(3)
-
 while True:
-    light_led(3, 3)
+    light_led(0, 1000)
