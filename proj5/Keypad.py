@@ -27,8 +27,9 @@ class Keypad():
                     else:
                         self._dict[(self._rowpins[i],
                                     self._columnpins[j])] = "#"
-                self._dict[(self._rowpins[i], self._columnpins[j])
-                           ] = str(1+3*i+j)
+                else:
+                    self._dict[(self._rowpins[i], self._columnpins[j])
+                               ] = str(1+3*i+j)
 
         # initializes the row and column pins
         GPIO.setmode(GPIO.BCM)
@@ -52,7 +53,7 @@ class Keypad():
             for cp in self._columnpins:
                 counter = 0
                 while GPIO.input(cp) == GPIO.HIGH:
-                    time.sleep(0.01)
+                    time.sleep(0.001)
                     counter += 1
                 if counter >= 20:
                     return rp, cp

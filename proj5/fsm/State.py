@@ -92,6 +92,7 @@ class InputCodeState(State):
         self._next_state = LoggedInState(fsm)
 
     def process_input(self, input: str) -> State:
+        print("ci: %s, so far: %s" % (input, self._code_so_far))
         if not is_int(input):
             return self  # Ignore any invalid input
         self._code_so_far += input
