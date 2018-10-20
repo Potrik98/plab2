@@ -47,13 +47,19 @@ class LedController:
     def power_up_leds(self, duration):
         for _ in range(3):
             for n in range(6):
-                self._hold_led((n * 2) % 5, duration / 18)
+                if n < 3:
+                    self._hold_led(n * 2, duration / 18)
+                else:
+                    self._hold_led(n * 2 - 5, duration / 18)
         self._resume_state()
 
     def power_down_leds(self, duration):
         for _ in range(2):
             for n in range(6):
-                self._hold_led(((5 - n) * 2) % 5, duration / 12)
+                if n < 3:
+                    self._hold_led((5 - n) * 2 - 5, duration / 18)
+                else:
+                    self._hold_led((5 - n) * 2, duration / 18)
         self._resume_state()
         self._active_led = None
 
