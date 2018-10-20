@@ -5,9 +5,10 @@ from fsm.State import (
     ChangeCodeState,
     LoggedInState,
     GetLedIdState,
-    GetLedDurationState
+    GetLedDurationState,
+    SleepingState
 )
-from fsm.FSM import FSMController
+from fsm.FSMController import FSMController
 
 
 class StateTest(unittest.TestCase):
@@ -69,8 +70,8 @@ class StateTest(unittest.TestCase):
         state = LoggedInState(fsm)
         state = state.process_input('0')
         state = state.process_input('#')
-        # Action 0 should return to the initial state
-        self.assertIsInstance(state, RecieveInputState)
+        # Action 0 should return to the sleeping state
+        self.assertIsInstance(state, SleepingState)
         state = LoggedInState(fsm)
         state = state.process_input('1')
         state = state.process_input('#')
@@ -85,8 +86,8 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(state, LoggedInState)
         state = state.process_input('0')
         state = state.process_input('#')
-        # Action 0 should return to the initial state
-        self.assertIsInstance(state, RecieveInputState)
+        # Action 0 should return to the sleeping state
+        self.assertIsInstance(state, SleepingState)
 
     def test_LoggedInState_invalid_action(self):
         fsm = FSMController()
@@ -97,8 +98,8 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(state, LoggedInState)
         state = state.process_input('0')
         state = state.process_input('#')
-        # Action 0 should return to the initial state
-        self.assertIsInstance(state, RecieveInputState)
+        # Action 0 should return to the sleeping state
+        self.assertIsInstance(state, SleepingState)
 
     def test_SetLedProcess(self):
         fsm = FSMController()
