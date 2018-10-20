@@ -53,7 +53,7 @@ class LedController:
     def power_down_leds(self, duration):
         for _ in range(2):
             for n in range(6):
-                self.light_led(((5 - n) * 2) % 5, duration / 12)
+                self._hold_led(((5 - n) * 2) % 5, duration / 12)
         self._resume_state()
         self._active_led = None
 

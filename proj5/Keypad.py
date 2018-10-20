@@ -62,8 +62,9 @@ class Keypad():
 
     # initiates repeated calls to do_polling until a key press is detected
     # returns the button pressed as a string
-    def get_next_signal(self):
+    def wait_for_next_signal(self):
         signal = None
         while signal is None:
+            time.sleep(0.1)
             signal = self._get_input_if_any()
         return signal
