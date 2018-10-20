@@ -7,6 +7,7 @@ lights = [[1, -1, 0], [-1, 1, 0], [0, 1, -1], [0, -1, 1], [1, 0, -1], [-1, 0, 1]
 
 def setup():
     GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
 
 
 def light_led(which, duration):
@@ -40,3 +41,6 @@ def power_down_leds(duration):
 
 setup()
 power_down_leds(3)
+
+while True:
+    light_led(3, 3)
