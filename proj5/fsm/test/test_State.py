@@ -3,7 +3,9 @@ from fsm.State import (
     RecieveInputState,
     InputCodeState,
     ChangeCodeState,
-    LoggedInState
+    LoggedInState,
+    GetLedIdState,
+    GetLedDurationState
 )
 from fsm.FSM import FSM
 
@@ -68,6 +70,11 @@ class StateTest(unittest.TestCase):
         state = state.process_input('#')
         # Action 0 should return to the initial state
         self.assertIsInstance(state, RecieveInputState)
+        state = LoggedInState(fsm)
+        state = state.process_input('1')
+        state = state.process_input('#')
+        # Action 1 should enter GetLedIdState
+        self.assertIsInstance(state, GetLedIdState)
 
     def test_LoggedInState_abort(self):
         fsm = FSM()
@@ -91,6 +98,18 @@ class StateTest(unittest.TestCase):
         state = state.process_input('#')
         # Action 0 should return to the initial state
         self.assertIsInstance(state, RecieveInputState)
+
+    def test_SetLedProcess(self):
+        fsm = FSM()
+        state = GetLedIdState(fsm)
+        state = state.process_input('1')
+        state = state.process_input('#')  # End led id input
+        self.assertIsInstance(state, GetLedDurationState)
+        self.assertEqual(state._led_id, 1)  # LED id should be 1
+        state = state.process_input("5")
+        state = state.process_input("#")  # End led duration input
+        # Should return to the logged in state
+        self.assertIsInstance(state, LoggedInState)
 
 
 if __name__ == '__main__':
