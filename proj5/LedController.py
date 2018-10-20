@@ -65,7 +65,7 @@ class LedController:
         t1 = Thread(target=lambda: self._turn_off_led_after(duration))
         t1.start()
 
-    def _turn_off_led_after(self, led_id, duration):
+    def _turn_off_led_after(self, duration):
         time.sleep(duration)
-        self._led_off(led_id)
+        self._led_off()
         self._active_led = None
