@@ -19,12 +19,16 @@ class Keypad():
             for j in range(len(self._columnpins)):
                 if i == 3:
                     if j == 0:
-                        self._dict[(self._rowpins[i], self._columnpins[j])] = "*"
+                        self._dict[(self._rowpins[i],
+                                    self._columnpins[j])] = "*"
                     elif j == 1:
-                        self._dict[(self._rowpins[i], self._columnpins[j])] = "0"
+                        self._dict[(self._rowpins[i],
+                                    self._columnpins[j])] = "0"
                     else:
-                        self._dict[(self._rowpins[i], self._columnpins[j])] = "#"
-                self._dict[(self._rowpins[i], self._columnpins[j])] = str(1+3*i+j)
+                        self._dict[(self._rowpins[i],
+                                    self._columnpins[j])] = "#"
+                self._dict[(self._rowpins[i], self._columnpins[j])
+                           ] = str(1+3*i+j)
 
         # initializes the row and column pins
         GPIO.setmode(GPIO.BCM)
@@ -52,7 +56,8 @@ class Keypad():
                     counter += 1
                 if counter >= 20:
                     return rp, cp
-            GPIO.output(rp, GPIO.LOW)  # only one row pin should be high at a time
+            # only one row pin should be high at a time
+            GPIO.output(rp, GPIO.LOW)
         return None
 
     # initiates repeated calls to do_polling until a key press is detected
