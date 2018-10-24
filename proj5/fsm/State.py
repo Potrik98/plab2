@@ -217,7 +217,7 @@ class GetLedDurationState(State):
         if is_int(input):
             # Append the input to the duration
             self._duration += input
-            print("duration: ")
+            print("duration: " + self._duration)
             return self
         elif input == '#':
             # Duration input complete
