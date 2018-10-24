@@ -29,7 +29,7 @@ class FSMController:
         self._led_controller.power_down_leds(1.0)
 
     def show_passcode_accepted_lights(self) -> None:
-        self._led_controller.twinkle_all_leds(3, 0.4)
+        self._led_controller.flash_all_leds()
 
     def show_error_lights(self) -> None:
         self._led_controller.error_leds()
