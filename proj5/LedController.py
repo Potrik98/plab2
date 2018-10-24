@@ -81,3 +81,11 @@ class LedController:
         time.sleep(duration)
         self._led_off()
         self._active_led = None
+
+    def flash_all_leds(self):
+        m = 0
+        while m < 1:
+            for n in range(6):
+                self._hold_led(n, 0.0001)
+                m += 0.0001
+        self._resume_state()
