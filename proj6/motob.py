@@ -1,5 +1,4 @@
-from motors import *
-from Behavior import *
+from motors import Motors
 
 class Motob:
     def __init__(self):
