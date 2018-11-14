@@ -10,5 +10,5 @@ class UltraBehavior(Behavior):
     def sense_and_act(self):
         distance = self.sensobs[1].sensor_get_value()
         self.halt_request = False
-        self.match_degree = 1 - min(distance, 1)
+        self.match_degree = 1 - min(distance/10, 1)
         self.motor_recommendations = [-1, -1]
