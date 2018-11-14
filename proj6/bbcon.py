@@ -15,6 +15,7 @@ class BBcon:
         self.sensobs = []
         self.motob = Motob()
         self.arbitrator = Arbitrator(self)
+        self._running = False
 
     def add_behavior(self, behavior):
         self.behaviors.append(behavior)
@@ -52,12 +53,13 @@ class BBcon:
         # update motor object based on recommended_behavior
         self.motob.update(recommended_behavior)
 
-        # wait
-        time.sleep(1)
-
         # reset sensobs
         for sensob in self.sensobs:
             sensob.reset()
+
+        # Stop running if a halt is requested
+        if halt_request:
+            self._running = False
 
     def startup(self):
         # add sensor objects
@@ -70,8 +72,11 @@ class BBcon:
 
         button = ZumoButton()
         button.wait_for_press()
-        while True:
+        self._running = True
+        while self._running:
             self.run_one_timestep()
+            # wait
+            time.sleep(1)
 
 
 if __name__ == "__main__":
