@@ -1,8 +1,11 @@
+from motob import MotorOperation
+
+
 class Behavior:
     def __init__(self, bbcon):
         self.bbcon = bbcon
         self.sensobs = self.bbcon.sensobs
-        self.motor_recommendation = 0
+        self.motor_recommendation = MotorOperation.STOP
         self.active_flag = False            # indicates if the behavior is active or not
         self.halt_request = None
         self.priority = -1                  # indicates the importance of this behavior

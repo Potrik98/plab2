@@ -13,4 +13,4 @@ class IRBehavior(Behavior):
         for value in value_list:
             i += value
         self.match_degree = max(((6 - i)/6 - 0.5) * 2,0)
-        self.motor_recommendations = MotorOperation.TURN_LEFT
+        self.motor_recommendation = MotorOperation.TURN_LEFT

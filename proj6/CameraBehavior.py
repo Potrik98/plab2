@@ -26,5 +26,5 @@ class CameraBehavior(Behavior):
 
         self.halt_request = False
         self.match_degree = redness
-        self.motor_recommendation = MotorOperation.STOP
+        self.motor_recommendation = MotorOperation.TURN_RIGHT
 
