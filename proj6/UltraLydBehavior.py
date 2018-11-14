@@ -6,7 +6,7 @@ from motob import MotorOperation
 class UltraBehavior(Behavior):
     def __init__(self, bbcon):
         Behavior.__init__(self, bbcon)
-        self.priority = 2.5
+        self.priority = 1.5
 
     def sense_and_act(self):
         distance = self.sensobs[1].get_value()
