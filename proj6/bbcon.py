@@ -5,6 +5,7 @@ from reflectance_sensors import ReflectanceSensors
 from sensob import Sensob
 from arbitrator import Arbitrator
 from motob import Motob
+from StandardBehavior import StandardBehavior
 import time
 
 
@@ -69,7 +70,9 @@ class BBcon:
         self.add_sensob(cam)
         self.add_sensob(ultrasonic)
         self.add_sensob(ir_sensor)
-
+        sb = StandardBehavior(self)
+        self.add_behavior(sb)
+        self.activate_behavior(sb)
         button = ZumoButton()
         button.wait_for_press()
         self._running = True
