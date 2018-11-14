@@ -11,6 +11,8 @@ class CameraBehavior(Behavior):
 
     def sense_and_act(self):
         image = self.sensobs[0].get_value()
+        if image == None:
+            return
         image.thumbnail((1, 1))
         c = image.getpixel((0, 0))
         print("Average pixel value:", c)
