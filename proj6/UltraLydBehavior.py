@@ -5,10 +5,10 @@ from ultrasonic import *
 class UltraBehavior(Behavior):
     def __init__(self, bbcon):
         Behavior.__init__(self, bbcon)
+        self.priority = 1.5
 
     def sense_and_act(self):
         distance = self.sensobs[1].sensor_get_value()
-        half_request = False
-        match_degree = min(distance, 1)
-        motor_recommendation = [-1, -1]
-        return half_request, match_degree, motor_recommendation
+        self.halt_request = False
+        self.match_degree = 1 - min(distance, 1)
+        self.motor_recommendations = [-1, -1]

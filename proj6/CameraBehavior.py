@@ -6,6 +6,7 @@ from camera import *
 class CameraBehavior(Behavior):
     def __init__(self, bbcon):
         Behavior.__init__(self, bbcon)
+        self.priority = 2
 
     def sense_and_act(self):
         image = self.sensobs[0].sensor_get_value()

@@ -10,4 +10,3 @@ class StandardBehavior(Behavior):
         self.halt_request = False
         self.match_degree = 1
         self.motor_recommendation = [1, 1]
-        self.weight = 1
