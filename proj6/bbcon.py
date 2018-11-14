@@ -42,8 +42,9 @@ class BBcon:
 
     def run_one_timestep(self):
         # update all sensobs
-        for sensob in self.sensobs:
-            sensob.update()
+        for i in range(len(sensob)):
+            if !(i == 0 && behavior[1].active_flag == false):
+                sensob.update()
 
         # update all behaviors
         for behavior in self.behaviors:
