@@ -21,8 +21,8 @@ class Motob:
         elif motor_recommendation == MotorOperation.BACKWARDS:
             self.motors.backward()
         elif motor_recommendation == MotorOperation.TURN_LEFT:
-            self.motors.left()
+            self.motors.left(1, 2.5)
         elif motor_recommendation == MotorOperation.TURN_RIGHT:
-            self.motors.right()
+            self.motors.right(1, 2.5)
         else:
             self.motors.forward(0)
