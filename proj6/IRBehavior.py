@@ -7,7 +7,7 @@ class IRBehavior(Behavior):
         self.priority = 2
 
     def sense_and_act(self):
-        value_list = self.sensobs[2].sensor_get_value()
+        value_list = self.sensobs[2].get_value()
         self.halt_request = False
         i = 0
         for value in value_list:
