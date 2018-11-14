@@ -1,7 +1,7 @@
 from Behavior import Behavior
 from motob import MotorOperation
-from imager2 import *
 from camera import *
+import math
 
 
 class CameraBehavior(Behavior):
@@ -10,18 +10,21 @@ class CameraBehavior(Behavior):
         self.priority = 2
 
     def sense_and_act(self):
-        image = self.sensobs[0].sensor_get_value()
-        imagewta = Imager.map_color_wta(image)
-        width, height = imagewta.size
-        rgb_im = imagewta.convert('RGB')
-
-        redamount = 0
-        pixelamount = width * height;
-        for x in range(width):
-            for y in range(height):
-                if rgb_im.getpixel((x, y)) == Imager._pixel_colors_['red']:
-                    redamount += 1
+        image = self.sensobs[0].get_value()
+        image.thumbnail((1, 1))
+        c = image.getpixel((0, 0))
+        print("Average pixel value:", c)
+        r = c[0]
+        g = c[1]
+        b = c[2]
+        l = max(math.sqrt(r * r + g * g + b * b), 0.01)
+        r /= l
+        g /= l
+        b /= l
+        redness = min(max(2 * r - (b + g), 0), 1)
+        print("redness: ", redness)
 
         self.halt_request = False
-        self.match_degree = redamount/pixelamount
+        self.match_degree = redness
         self.motor_recommendation = MotorOperation.STOP
+

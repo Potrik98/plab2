@@ -29,7 +29,8 @@ class BBcon:
     # add a newly active behavior to the active_behaviors list
     # (if it exists in behaviors)
     def activate_behavior(self, active_behavior):
-        if self.behaviors.__contains__(active_behavior):
+        if self.behaviors.__contains__(active_behavior) and \
+                active_behavior not in self.active_behaviors:
             self.active_behaviors.append(active_behavior)
 
     # remove a newly deactived behavior from the active_behaviors list
@@ -78,7 +79,7 @@ class BBcon:
         cb = CameraBehavior(self)
         self.add_behavior(cb)
         self.activate_behavior(cb)
-        ub = UltraLydBehavior(self)
+        ub = UltraBehavior(self)
         self.add_behavior(ub)
         self.activate_behavior(ub)
         button = ZumoButton()
