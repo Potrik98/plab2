@@ -72,6 +72,7 @@ class Motors():
 
 
     def stop(self):
+        print("Stopping motors")
         self.dc = 0
         self.set_left_speed(self.dc)
         self.set_right_speed(self.dc)

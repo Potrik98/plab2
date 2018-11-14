@@ -9,7 +9,7 @@ class Arbitrator:
     # returns the motor recommendation and halt flag
     def choose_action(self) -> (list, bool):
         mx = -1
-        action: Behavior
+        action = None # Action is the selected behaviour
         for active_behavior in self.bbc.active_behaviors:
             if active_behavior.weight > mx:
                 mx = active_behavior.weight

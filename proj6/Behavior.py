@@ -10,12 +10,12 @@ class Behavior:
         self.weight = 0                     # basis to decide whether to use this behavior or not
 
     def consider_deactivation(self):
-        if not self.bbcon.status[self]:
-            self.active_flag = False
+        #if not self.bbcon.status[self]:
+        self.active_flag = True
 
     def consider_activation(self):
-        if self.bbcon.status[self]:
-            self.active_flag = True
+        #if self.bbcon.status[self]:
+        self.active_flag = True
 
     def update(self):
         if self.active_flag:
