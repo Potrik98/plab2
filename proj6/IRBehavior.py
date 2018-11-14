@@ -12,5 +12,5 @@ class IRBehavior(Behavior):
         i = 0
         for value in value_list:
             i += value
-        self.match_degree = max(((length(value_list) - i)/length(value_list) - 0.5) * 2,0)
+        self.match_degree = max(((6 - i)/6 - 0.5) * 2,0)
         self.motor_recommendations = MotorOperation.TURN_LEFT
