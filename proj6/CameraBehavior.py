@@ -1,4 +1,5 @@
 from Behavior import Behavior
+from motob import MotorOperation
 from imager2 import *
 from camera import *
 
@@ -23,4 +24,4 @@ class CameraBehavior(Behavior):
 
         self.halt_request = False
         self.match_degree = redamount/pixelamount
-        self.motor_recommendations = [0, 0]
+        self.motor_recommendation = MotorOperation.STOP

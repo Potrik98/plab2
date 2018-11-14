@@ -1,15 +1,28 @@
 from motors import Motors
+from enum import Enum
+
+
+class MotorOperation(Enum):
+    STOP = 0
+    FORWARDS = 1
+    BACKWARDS = 2
+    TURN_LEFT = 3
+    TURN_RIGHT = 4
+
 
 class Motob:
     def __init__(self):
         self.motors = Motors()
 
-    def update(self, motor_recommendation):
+    def update(self, motor_recommendation: MotorOperation):
         print(motor_recommendation)
-        self.operationalize(motor_recommendation[0], motor_recommendation[1])
-
-    # sets the right and left motors to left_speed and right_speed
-    def operationalize(self, left_speed, right_speed):
-        self.motors.forward(0.5)
-
-
+        if motor_recommendation == MotorOperation.FORWARDS:
+            self.motors.forward()
+        elif motor_recommendation == MotorOperation.BACKWARDS:
+            self.motors.backward()
+        elif motor_recommendation == MotorOperation.TURN_LEFT:
+            self.motors.left()
+        elif motor_recommendation == MotorOperation.TURN_RIGHT:
+            self.motors.right()
+        else:
+            self.motors.stop()

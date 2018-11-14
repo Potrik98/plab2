@@ -1,4 +1,5 @@
 from Behavior import Behavior
+from motob import MotorOperation
 
 
 class StandardBehavior(Behavior):
@@ -9,4 +10,4 @@ class StandardBehavior(Behavior):
     def sense_and_act(self):
         self.halt_request = False
         self.match_degree = 1
-        self.motor_recommendations = [1, 1]
+        self.motor_recommendations = MotorOperation.FORWARDS

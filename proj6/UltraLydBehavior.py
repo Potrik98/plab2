@@ -1,5 +1,6 @@
 from Behavior import Behavior
 from ultrasonic import *
+from motob import MotorOperation
 
 
 class UltraBehavior(Behavior):
@@ -11,4 +12,4 @@ class UltraBehavior(Behavior):
         distance = self.sensobs[1].sensor_get_value()
         self.halt_request = False
         self.match_degree = 1 - min(distance/10, 1)
-        self.motor_recommendations = [-1, -1]
+        self.motor_recommendation = MotorOperation.BACKWARDS
