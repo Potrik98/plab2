@@ -6,6 +6,8 @@ from sensob import Sensob
 from arbitrator import Arbitrator
 from motob import Motob
 from StandardBehavior import StandardBehavior
+from CameraBehavior import CameraBehavior
+from UltraLydBehavior import UltraBehavior
 import time
 
 
@@ -73,6 +75,12 @@ class BBcon:
         sb = StandardBehavior(self)
         self.add_behavior(sb)
         self.activate_behavior(sb)
+        cb = CameraBehavior(self)
+        self.add_behavior(cb)
+        self.activate_behavior(cb)
+        ub = UltraLydBehavior(self)
+        self.add_behavior(ub)
+        self.activate_behavior(ub)
         button = ZumoButton()
         button.wait_for_press()
         self._running = True
