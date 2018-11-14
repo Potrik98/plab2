@@ -28,3 +28,14 @@ class CameraBehavior(Behavior):
         self.match_degree = redness
         self.motor_recommendation = MotorOperation.TURN_RIGHT
 
+    def consider_deactivation(self):
+        distance = self.sensobs[1].get_value()
+        distance_degree = 1 / max(distance - 10, 1)
+        if distance_degree <= 0.5:
+            self.active_flag = False
+
+    def consider_activation(self):
+        distance = self.sensobs[1].get_value()
+        distance_degree = 1 / max(distance - 10, 1)
+        if distance_degree > 0.5:
+            self.active_flag = True
