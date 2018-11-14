@@ -44,7 +44,7 @@ class BBcon:
         # update all sensobs
         for i in range(len(sensob)):
             if !(i == 0 and behavior[1].active_flag == false):
-                sensob.update()
+                sensob[i].update()
 
         # update all behaviors
         for behavior in self.behaviors:
