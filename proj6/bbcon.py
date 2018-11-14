@@ -78,7 +78,7 @@ class BBcon:
         cb = CameraBehavior(self)
         self.add_behavior(cb)
         self.activate_behavior(cb)
-        ub = UltraLydBehavior(self)
+        ub = UltraBehavior(self)
         self.add_behavior(ub)
         self.activate_behavior(ub)
         button = ZumoButton()

@@ -10,16 +10,17 @@ class CameraBehavior(Behavior):
         self.priority = 2
 
     def sense_and_act(self):
-        image = self.sensobs[0].sensor_get_value()
-        imagewta = Imager.map_color_wta(image)
-        width, height = imagewta.size
-        rgb_im = imagewta.convert('RGB')
+        image = self.sensobs[0].get_value()
+        width, height = image.size
+        imager = Imager(width=width, height=height)
+        image_wta = imager.map_color_wta(image)
+        rgb_im = image_wta
 
         redamount = 0
         pixelamount = width * height;
         for x in range(width):
             for y in range(height):
-                if rgb_im.getpixel((x, y)) == Imager._pixel_colors_['red']:
+                if rgb_im.get_pixel(x, y) == Imager._pixel_colors_['red']:
                     redamount += 1
 
         self.halt_request = False
