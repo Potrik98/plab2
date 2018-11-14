@@ -1,5 +1,6 @@
-from motors import *
+from motors import Motors
 from behavior import *
+
 
 class Motob:
     def __init__(self):
@@ -10,7 +11,9 @@ class Motob:
         self.operationalize(recommended_behavior.motor_recommendations)
 
     # settings should be a list consisting of max 3 elements:
-    #   action (string/character), speed (float [-1, 1]), duration (time in seconds)
+    # action (string/character)
+    # speed (float [-1, 1])
+    # duration (time in seconds)
     def operationalize(self, settings):
         if settings[0] == 'L':
             self.motors.left(settings[1], settings[2])

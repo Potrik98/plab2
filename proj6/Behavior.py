@@ -1,10 +1,10 @@
 class Behavior:
     def __init__(self, bbcon):
         self.bbcon = bbcon
-        self.sensobs = []
+        self.sensobs = self.bbcon.sensobs
         self.motor_recommendations = []
         self.active_flag = False            # indicates if the behavior is active or not
-        self.half_request = None
+        self.halt_request = None
         self.priority = -1                  # indicates the importance of this behavior
         self.match_degree = 0               # float between 0 and 1
         self.weight = 0                     # basis to decide whether to use this behavior or not
@@ -24,8 +24,9 @@ class Behavior:
             self.consider_activation()
         if not self.active_flag:
             return
-        self.half_request, self.match_degree, self.motor_recommendations = self.sense_and_act()
+        self.sense_and_act()
         self.weight = self.match_degree * self.priority
 
-    def sense_and_act(self):  # Meant for overriding
-        return NotImplementedError()
+    # Sets the motor recommendations
+    def sense_and_act(self):
+        raise NotImplementedError()

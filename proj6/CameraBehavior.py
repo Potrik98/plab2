@@ -20,7 +20,6 @@ class CameraBehavior(Behavior):
                 if rgb_im.getpixel((x, y)) == Imager._pixel_colors_['red']:
                     redamount += 1
 
-        half_request = False
-        match_degree = redamount/pixelamount
-        motor_recommendation = (-1, -1)
-        return half_request, match_degree, motor_recommendation
+        self.halt_request = False
+        self.match_degree = redamount/pixelamount
+        self.motor_recommendations = [0, 0]
