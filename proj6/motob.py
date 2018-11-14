@@ -3,7 +3,7 @@ from enum import Enum
 
 
 class MotorOperation(Enum):
-    STOP = 0
+    STOP = 5
     FORWARDS = 1
     BACKWARDS = 2
     TURN_LEFT = 3
@@ -25,4 +25,4 @@ class Motob:
         elif motor_recommendation == MotorOperation.TURN_RIGHT:
             self.motors.right()
         else:
-            self.motors.stop()
+            self.motors.forward(0)

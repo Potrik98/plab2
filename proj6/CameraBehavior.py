@@ -1,7 +1,7 @@
 from Behavior import Behavior
 from motob import MotorOperation
-from imager2 import *
 from camera import *
+import math
 
 
 class CameraBehavior(Behavior):
@@ -11,18 +11,31 @@ class CameraBehavior(Behavior):
 
     def sense_and_act(self):
         image = self.sensobs[0].get_value()
-        width, height = image.size
-        imager = Imager(width=width, height=height)
-        image_wta = imager.map_color_wta(image)
-        rgb_im = image_wta
-
-        redamount = 0
-        pixelamount = width * height;
-        for x in range(width):
-            for y in range(height):
-                if rgb_im.get_pixel(x, y) == Imager._pixel_colors_['red']:
-                    redamount += 1
+        image.thumbnail((1, 1))
+        c = image.getpixel((0, 0))
+        print("Average pixel value:", c)
+        r = c[0]
+        g = c[1]
+        b = c[2]
+        l = max(math.sqrt(r * r + g * g + b * b), 0.01)
+        r /= l
+        g /= l
+        b /= l
+        redness = min(max(2 * r - (b + g), 0), 1)
+        print("redness: ", redness)
 
         self.halt_request = False
-        self.match_degree = redamount/pixelamount
-        self.motor_recommendation = MotorOperation.STOP
+        self.match_degree = redness
+        self.motor_recommendation = MotorOperation.TURN_RIGHT
+
+    def consider_deactivation(self):
+        distance = self.sensobs[1].get_value()
+        distance_degree = 1 / max(distance - 10, 1)
+        if distance_degree <= 0.5:
+            self.active_flag = False
+
+    def consider_activation(self):
+        distance = self.sensobs[1].get_value()
+        distance_degree = 1 / max(distance - 10, 1)
+        if distance_degree > 0.5:
+            self.active_flag = True

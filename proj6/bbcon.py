@@ -8,6 +8,7 @@ from motob import Motob
 from StandardBehavior import StandardBehavior
 from CameraBehavior import CameraBehavior
 from UltraLydBehavior import UltraBehavior
+from IRBehavior import IRBehavior
 import time
 
 
@@ -29,7 +30,8 @@ class BBcon:
     # add a newly active behavior to the active_behaviors list
     # (if it exists in behaviors)
     def activate_behavior(self, active_behavior):
-        if self.behaviors.__contains__(active_behavior):
+        if self.behaviors.__contains__(active_behavior) and \
+                active_behavior not in self.active_behaviors:
             self.active_behaviors.append(active_behavior)
 
     # remove a newly deactived behavior from the active_behaviors list
@@ -40,8 +42,9 @@ class BBcon:
 
     def run_one_timestep(self):
         # update all sensobs
-        for sensob in self.sensobs:
-            sensob.update()
+        for i in range(len(sensob)):
+            if !(i == 0 and behavior[1].active_flag == false):
+                sensob[i].update()
 
         # update all behaviors
         for behavior in self.behaviors:
@@ -72,6 +75,8 @@ class BBcon:
         self.add_sensob(cam)
         self.add_sensob(ultrasonic)
         self.add_sensob(ir_sensor)
+        
+        # add behaviors
         sb = StandardBehavior(self)
         self.add_behavior(sb)
         self.activate_behavior(sb)
@@ -81,6 +86,10 @@ class BBcon:
         ub = UltraBehavior(self)
         self.add_behavior(ub)
         self.activate_behavior(ub)
+        ir = IRBehavior(self)
+        self.add_behavior(ir)
+        self.activate_behavior(ir)
+        
         button = ZumoButton()
         button.wait_for_press()
         self._running = True
